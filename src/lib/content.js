@@ -1,0 +1,9 @@
+import data from '../content/site.json';
+export const site = data;
+export const languages = ['zh', 'en'];
+export const approved = Object.values(data.approvals).every(Boolean);
+export const records = data.archive.filter(item => item.status === 'published');
+export const words = {
+  zh: { home:'首页', about:'关于我们', archive:'共同档案', language:'EN', skip:'跳到正文', draft:'设计预览 · 文案与影像待确认', band:'六个人的乐队', explore:'认识我们', viewArchive:'翻开档案', members:'六个位置，六种声音', member:'成员', pending:'姓名待确认', close:'关闭图片', prev:'上一张', next:'下一张', expand:'查看大图', image:'图片', original:'打开原图', emptyTitle:'影像还在整理，故事继续。', empty:'下一次，一起把这里填满。', back:'回到档案', pageMissing:'这一页，暂时没有声音。', returnHome:'回到首页', videoError:'视频暂时无法播放，请稍后重试。', footer:'我们的故事，还在继续。', rights:'文字与影像权利归相应权利人所有。', index:'目录', entry:'记录', membersLabel:'乐队成员', illustration:'六条相互交织的线，象征六种声音', detail:'阅读全文', note:'关于这支乐队', archiveNote:'照片、片段，以及不必写成故事的日常。' },
+  en: { home:'Home', about:'About', archive:'Archive', language:'中文', skip:'Skip to content', draft:'Design preview · Copy and imagery awaiting review', band:'A band of six', explore:'Meet the band', viewArchive:'Open the archive', members:'Six places. Six sounds.', member:'Member', pending:'Name to be confirmed', close:'Close image', prev:'Previous image', next:'Next image', expand:'View larger image', image:'Image', original:'Open original', emptyTitle:'Images to come. A story in motion.', empty:'Something to add, the next time we meet.', back:'Back to the archive', pageMissing:'No sound on this page. Yet.', returnHome:'Back to home', videoError:'This video cannot play right now. Please try again later.', footer:'Our story is still unfolding.', rights:'Words and images belong to their respective rights holders.', index:'Index', entry:'Entry', membersLabel:'Band members', illustration:'Six interwoven lines representing six different sounds', detail:'Read the entry', note:'About this band', archiveNote:'Photographs, fragments, and days that need no story.' }
+};

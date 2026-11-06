@@ -1,0 +1,52 @@
+---
+import '../styles/global.css';
+import { approved, words } from '../lib/content.js';
+import Wordmark from '../components/Wordmark.astro';
+const { lang = 'zh', section = 'home', title, description, path = '', counterpart = null } = Astro.props;
+const t = words[lang];
+const other = lang === 'zh' ? 'en' : 'zh';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const pageTitle = title ? `${title} — insulin` : 'insulin — ' + (lang === 'zh' ? '让声音，留在我们之间。' : 'A little sound. A little of us.');
+---
+<!doctype html>
+<html lang={lang === 'zh' ? 'zh-CN' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#F6F3EC" />
+    <meta name="description" content={description || (lang === 'zh' ? 'insulin，六个人的乐队。声音、影像，和还在继续的共同经历。' : 'insulin, a band of six. Sounds, images, and a story still unfolding.')} />
+    {!approved && <meta name="robots" content="noindex,nofollow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="zh-CN" href={new URL(`/zh/${path}`, Astro.site)} />
+    <link rel="alternate" hreflang="en" href={new URL(`/en/${path}`, Astro.site)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description || t.footer} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.skip}</a>
+    {!approved && <div class="review-strip">{t.draft}</div>}
+    <header class="site-header">
+      <a class="brand" href={`/${lang}/`} aria-label={`insulin — ${t.home}`}><Wordmark /></a>
+      <nav aria-label={t.index}>
+        <a href={`/${lang}/about/`} aria-current={section === 'about' ? 'page' : undefined}>{t.about}</a>
+        <a href={`/${lang}/archive/`} aria-current={section === 'archive' ? 'page' : undefined}>{t.archive}</a>
+        <a class="language-switch" href={counterpart || `/${other}/${path}`} lang={other === 'zh' ? 'zh-CN' : 'en'} hreflang={other === 'zh' ? 'zh-CN' : 'en'} data-language={other}>{t.language}</a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="footer-top"><a class="brand" href={`/${lang}/`}><Wordmark /></a><p>{t.footer}</p><a class="to-top" href="#main" aria-label={lang === 'zh' ? '回到顶部' : 'Back to top'}>↑</a></div>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} insulin</span><span>{t.rights}</span><a href={`/${other}/${path}`} data-language={other}>{t.language}</a></div>
+    </footer>
+    <dialog class="lightbox" aria-label={t.expand}>
+      <div class="lightbox-toolbar"><span class="lightbox-count" aria-live="polite"></span><button data-close aria-label={t.close}>×</button></div>
+      <div class="lightbox-stage"><button data-prev aria-label={t.prev}>←</button><figure><img class="lightbox-image" alt="" /><figcaption class="lightbox-caption"></figcaption></figure><button data-next aria-label={t.next}>→</button></div>
+      <a class="lightbox-original" target="_blank" rel="noopener noreferrer">{t.original} ↗</a>
+    </dialog>
+    <script>import '../scripts/site.js';</script>
+  </body>
+</html>

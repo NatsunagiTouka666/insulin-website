@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Threads from '../../components/Threads.astro';
+import Gallery from '../../components/Gallery.astro';
+import { site, words, languages } from '../../lib/content.js';
+export function getStaticPaths() { return languages.map(lang => ({ params: { lang } })); }
+const lang = Astro.params.lang;
+const t = words[lang];
+---
+<Layout lang={lang} section="about" title={t.about} path="about/">
+  <section class="page-intro"><span class="eyebrow">ABOUT / THE SIX OF US</span><h1>{lang === 'zh' ? '不同的声音，\n在这里相遇。' : 'Different sounds.\nA place to meet.'}</h1><div class="intro-end"><span class="tiny-note">{t.band}</span><p>{site.about[lang]}</p></div></section>
+  <Threads label={t.illustration} quiet />
+  <section class="members-section section-space"><div class="section-label"><span>01 — 06</span><h2>{t.members}</h2></div><ol class="member-list" aria-label={t.membersLabel}>{[...site.members].sort((a,b)=>a.order-b.order).map((member,i)=><li><span class="member-number">0{i+1}</span><h3>{member.status === 'published' && member.name ? (lang === 'en' ? member.nameEn || member.name : member.name) : `${t.member} 0${i+1}`}<small>{member.status === 'draft' ? t.pending : ''}</small></h3><p>{member.role[lang]}</p>{member.photo && <Gallery images={[member.photo]} lang={lang} id={member.id} />}</li>)}</ol></section>
+  <section class="next-section"><span class="eyebrow">NEXT / ARCHIVE</span><a href={`/${lang}/archive/`}>{t.viewArchive}<span aria-hidden="true">↗</span></a></section>
+</Layout>

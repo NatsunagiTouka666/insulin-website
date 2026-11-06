@@ -1,0 +1,20 @@
+{
+  "approvals": { "chineseCopy": false, "englishCopy": false, "members": true, "media": false },
+  "home": {
+    "zh": { "line1": "让声音，", "line2": "留在我们之间。", "intro": "六个人，一些声音，和还在继续的共同经历。", "about": "不同的声音，\n在这里相遇。", "note": "我们把一起发出的声音，和一起经过的日子，慢慢放在这里。", "archive": "留下一些，\n还想记得的。" },
+    "en": { "line1": "A little sound.", "line2": "A little of us.", "intro": "Six people, a few sounds, and a story still being written together.", "about": "Different sounds.\nA place to meet.", "note": "A place for the sounds we make together, and the days we share along the way.", "archive": "A few things\nto keep close." }
+  },
+  "about": {
+    "zh": "insulin 是一支六人乐队。这是我们放下声音、影像和共同经历的地方。我们没有急着为它写下结尾。",
+    "en": "insulin is a six-piece band. This is a place for our sounds, images, and shared experiences. We are in no hurry to write the ending."
+  },
+  "members": [
+    { "id": "member-01", "name": "王梓皓", "nameEn": "王梓皓", "role": { "zh": "键盘 / 主唱", "en": "Keys / Vocals" }, "order": 1, "status": "published", "photo": null },
+    { "id": "member-02", "name": "陈奕龙", "nameEn": "陈奕龙", "role": { "zh": "主唱", "en": "Vocals" }, "order": 2, "status": "published", "photo": null },
+    { "id": "member-03", "name": "左翊甫", "nameEn": "左翊甫", "role": { "zh": "鼓", "en": "Drums" }, "order": 3, "status": "published", "photo": null },
+    { "id": "member-04", "name": "赵一鹏", "nameEn": "赵一鹏", "role": { "zh": "贝斯", "en": "Bass" }, "order": 4, "status": "published", "photo": null },
+    { "id": "member-05", "name": "李唐振宇", "nameEn": "李唐振宇", "role": { "zh": "吉他", "en": "Guitar" }, "order": 5, "status": "published", "photo": null },
+    { "id": "member-06", "name": "张金羽", "nameEn": "张金羽", "role": { "zh": "吉他", "en": "Guitar" }, "order": 6, "status": "published", "photo": null }
+  ],
+  "archive": []
+}

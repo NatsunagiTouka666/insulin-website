@@ -1,0 +1,12 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Record from '../../../components/Record.astro';
+import { words, records, languages } from '../../../lib/content.js';
+export function getStaticPaths() { return records.filter(r=>r.detail).flatMap(record=>languages.map(lang=>({params:{lang,id:record.id},props:{record}}))); }
+const {record} = Astro.props;
+const lang = Astro.params.lang;
+const t = words[lang];
+---
+<Layout lang={lang} section="archive" title={record.title?.[lang] || t.entry} path={`archive/${record.id}/`}>
+  <section class="detail-page"><a class="text-link" href={`/${lang}/archive/`}>← {t.back}</a><Record record={record} lang={lang} detail /></section>
+</Layout>

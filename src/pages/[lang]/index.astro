@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Wordmark from '../../components/Wordmark.astro';
+import Threads from '../../components/Threads.astro';
+import Record from '../../components/Record.astro';
+import { site, words, records, languages } from '../../lib/content.js';
+export function getStaticPaths() { return languages.map(lang => ({ params: { lang } })); }
+const lang = Astro.params.lang;
+const t = words[lang];
+const copy = site.home[lang];
+---
+<Layout lang={lang}>
+  <section class="hero">
+    <div class="hero-topline"><span class="eyebrow">{t.band}</span><span class="eyebrow">SOUNDS / PEOPLE / DAYS</span></div>
+    <h1 class="hero-logo"><Wordmark large /></h1>
+    <div class="hero-bottom"><p class="hero-statement">{copy.line1}<br />{copy.line2}</p><div class="hero-aside"><p>{copy.intro}</p><a class="text-link" href={`/${lang}/about/`}>{t.explore}<span aria-hidden="true">↗</span></a></div></div>
+    <a class="scroll-note" href="#in-between"><span>SCROLL TO WANDER</span><span aria-hidden="true">↓</span></a>
+  </section>
+  <section class="interlude" id="in-between"><div class="section-label"><span>01 / IN BETWEEN</span><span>insulin.love</span></div><Threads label={t.illustration} /><p class="interlude-note">{lang === 'zh' ? '六条线，偶尔相遇。' : 'Six lines, crossing now and then.'}</p></section>
+  <section class="home-about section-space"><div class="section-label"><span>02 / THE SIX OF US</span><span>{t.note}</span></div><div class="split-editorial"><h2>{copy.about}</h2><div class="editorial-copy"><p>{copy.note}</p><a class="text-link" href={`/${lang}/about/`}>{t.explore}<span aria-hidden="true">↗</span></a></div></div><div class="role-line">{site.members.map((m,i) => <span><small>0{i+1}</small>{m.role[lang]}</span>)}</div></section>
+  <section class="home-archive section-space"><div class="section-label"><span>03 / COLLECTED DAYS</span><span>{t.archive}</span></div><div class="archive-heading"><h2>{copy.archive}</h2><a class="text-link" href={`/${lang}/archive/`}>{t.viewArchive}<span aria-hidden="true">↗</span></a></div>{records.length ? records.slice(0,2).map(record => <Record record={record} lang={lang} />) : <div class="archive-empty-inline"><span class="empty-circle" aria-hidden="true">＋</span><p>{t.emptyTitle}</p><span class="eyebrow">TO BE CONTINUED</span></div>}</section>
+</Layout>

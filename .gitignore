@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.sites-runtime/
+.env
+.env.*
+!.env.example
+*.tar.gz
+*.tgz
+private/
+test-results/

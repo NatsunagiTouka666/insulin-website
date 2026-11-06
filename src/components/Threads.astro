@@ -1,0 +1,16 @@
+---
+const { label, quiet = false } = Astro.props;
+---
+<div class:list={['threads', { quiet }]} data-parallax>
+  <svg viewBox="0 0 1000 460" role="img" aria-label={label} fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" stroke-width="1.15">
+      <path d="M-20 295C150 295 210 100 365 145S535 427 685 280 850 118 1020 160"/>
+      <path d="M-20 305C155 305 225 125 375 168S550 398 698 269 867 140 1020 174"/>
+      <path d="M-20 315C165 315 240 153 385 191S565 370 710 258 883 162 1020 188"/>
+      <path d="M-20 325C180 325 255 181 395 214S580 342 722 247 900 184 1020 202"/>
+      <path d="M-20 335C190 335 270 208 405 237S595 314 734 236 917 206 1020 216"/>
+      <path d="M-20 345C200 345 285 236 415 260S610 286 746 225 934 228 1020 230"/>
+    </g>
+    <circle cx="475" cy="282" r="7" fill="var(--accent)"/>
+  </svg>
+</div>

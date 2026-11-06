@@ -1,20 +1,384 @@
 {
-  "approvals": { "chineseCopy": false, "englishCopy": false, "members": true, "media": false },
+  "approvals": {
+    "chineseCopy": false,
+    "englishCopy": false,
+    "members": true,
+    "media": false
+  },
   "home": {
-    "zh": { "line1": "让声音，", "line2": "留在我们之间。", "intro": "六个人，一些声音，和还在继续的共同经历。", "about": "不同的声音，\n在这里相遇。", "note": "我们把一起发出的声音，和一起经过的日子，慢慢放在这里。", "archive": "留下一些，\n还想记得的。" },
-    "en": { "line1": "A little sound.", "line2": "A little of us.", "intro": "Six people, a few sounds, and a story still being written together.", "about": "Different sounds.\nA place to meet.", "note": "A place for the sounds we make together, and the days we share along the way.", "archive": "A few things\nto keep close." }
+    "zh": {
+      "line1": "让声音，",
+      "line2": "留在我们之间。",
+      "intro": "六个人，一些声音，和还在继续的共同经历。",
+      "about": "不同的声音，\n在这里相遇。",
+      "note": "我们把一起发出的声音，和一起经过的日子，慢慢放在这里。",
+      "archive": "留下一些，\n还想记得的。"
+    },
+    "en": {
+      "line1": "A little sound.",
+      "line2": "A little of us.",
+      "intro": "Six people, a few sounds, and a story still being written together.",
+      "about": "Different sounds.\nA place to meet.",
+      "note": "A place for the sounds we make together, and the days we share along the way.",
+      "archive": "A few things\nto keep close."
+    }
   },
   "about": {
     "zh": "insulin 是一支六人乐队。这是我们放下声音、影像和共同经历的地方。我们没有急着为它写下结尾。",
     "en": "insulin is a six-piece band. This is a place for our sounds, images, and shared experiences. We are in no hurry to write the ending."
   },
   "members": [
-    { "id": "member-01", "name": "王梓皓", "nameEn": "王梓皓", "role": { "zh": "键盘 / 主唱", "en": "Keys / Vocals" }, "order": 1, "status": "published", "photo": null },
-    { "id": "member-02", "name": "陈奕龙", "nameEn": "陈奕龙", "role": { "zh": "主唱", "en": "Vocals" }, "order": 2, "status": "published", "photo": null },
-    { "id": "member-03", "name": "左翊甫", "nameEn": "左翊甫", "role": { "zh": "鼓", "en": "Drums" }, "order": 3, "status": "published", "photo": null },
-    { "id": "member-04", "name": "赵一鹏", "nameEn": "赵一鹏", "role": { "zh": "贝斯", "en": "Bass" }, "order": 4, "status": "published", "photo": null },
-    { "id": "member-05", "name": "李唐振宇", "nameEn": "李唐振宇", "role": { "zh": "吉他", "en": "Guitar" }, "order": 5, "status": "published", "photo": null },
-    { "id": "member-06", "name": "张金羽", "nameEn": "张金羽", "role": { "zh": "吉他", "en": "Guitar" }, "order": 6, "status": "published", "photo": null }
+    {
+      "id": "member-01",
+      "name": "王梓皓",
+      "nameEn": "王梓皓",
+      "role": {
+        "zh": "键盘 / 主唱",
+        "en": "Keys / Vocals"
+      },
+      "order": 1,
+      "status": "published",
+      "photo": null
+    },
+    {
+      "id": "member-02",
+      "name": "陈奕龙",
+      "nameEn": "陈奕龙",
+      "role": {
+        "zh": "主唱",
+        "en": "Vocals"
+      },
+      "order": 2,
+      "status": "published",
+      "photo": null
+    },
+    {
+      "id": "member-03",
+      "name": "左翊甫",
+      "nameEn": "左翊甫",
+      "role": {
+        "zh": "鼓",
+        "en": "Drums"
+      },
+      "order": 3,
+      "status": "published",
+      "photo": null
+    },
+    {
+      "id": "member-04",
+      "name": "赵一鹏",
+      "nameEn": "赵一鹏",
+      "role": {
+        "zh": "贝斯",
+        "en": "Bass"
+      },
+      "order": 4,
+      "status": "published",
+      "photo": null
+    },
+    {
+      "id": "member-05",
+      "name": "李唐振宇",
+      "nameEn": "李唐振宇",
+      "role": {
+        "zh": "吉他",
+        "en": "Guitar"
+      },
+      "order": 5,
+      "status": "published",
+      "photo": null
+    },
+    {
+      "id": "member-06",
+      "name": "张金羽",
+      "nameEn": "张金羽",
+      "role": {
+        "zh": "吉他",
+        "en": "Guitar"
+      },
+      "order": 6,
+      "status": "published",
+      "photo": null
+    }
   ],
-  "archive": []
+  "archive": [
+    {
+      "id": "on-stage",
+      "status": "published",
+      "order": 1,
+      "detail": true,
+      "title": {
+        "zh": "站在声音里",
+        "en": "In the sound"
+      },
+      "images": [
+        {
+          "src": "/media/on-stage-wide.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "乐队在台阶前演出，主唱、吉他手和键盘手站在鼓组旁。",
+            "en": "The band performing in front of outdoor steps, with vocals, guitars and keyboard beside the drum kit."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/on-stage-wide-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        },
+        {
+          "src": "/media/on-stage-close.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "主唱手持话筒，鼓手、贝斯手和键盘手一同演奏。",
+            "en": "The vocalist holding a microphone, with drums, bass and keyboard alongside."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/on-stage-close-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        },
+        {
+          "src": "/media/on-stage-side.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "从侧面拍摄的演出，话筒、鼓组与键盘排列在台阶前。",
+            "en": "A side view of the performance, with microphones, drums and keyboard in front of the steps."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/on-stage-side-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        }
+      ],
+      "homeFeatured": true
+    },
+    {
+      "id": "two-voices",
+      "status": "published",
+      "order": 2,
+      "detail": true,
+      "title": {
+        "zh": "两支话筒",
+        "en": "Two microphones"
+      },
+      "images": [
+        {
+          "src": "/media/two-voices.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "两位拿着话筒的演唱者，身后是站在台阶上的观众。",
+            "en": "Two singers holding microphones, with the audience on the steps behind them."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/two-voices-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        },
+        {
+          "src": "/media/voice-and-keys.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "主唱对着话筒演唱，键盘手在旁边弹奏。",
+            "en": "A singer at the microphone with the keyboard player alongside."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/voice-and-keys-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "playing-together",
+      "status": "published",
+      "order": 3,
+      "detail": true,
+      "title": {
+        "zh": "各自演奏，一起发声",
+        "en": "Playing together"
+      },
+      "images": [
+        {
+          "src": "/media/guitar.webp",
+          "width": 1333,
+          "height": 2000,
+          "alt": {
+            "zh": "一位穿黑色外套的吉他手正在演奏白色电吉他。",
+            "en": "A guitarist in a dark jacket playing a white electric guitar."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/guitar-720.webp",
+              "width": 720,
+              "height": 1080
+            }
+          ]
+        },
+        {
+          "src": "/media/bass.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "贝斯手低头演奏浅色贝斯，鼓组位于画面左侧。",
+            "en": "A bassist looking down at a light-coloured bass, with the drum kit on the left."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/bass-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        },
+        {
+          "src": "/media/drums.webp",
+          "width": 2000,
+          "height": 1333,
+          "alt": {
+            "zh": "鼓手举着鼓棒坐在鼓组后，贝斯手站在右侧。",
+            "en": "The drummer holding a drumstick behind the kit, with the bassist to the right."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/drums-720.webp",
+              "width": 720,
+              "height": 480
+            }
+          ]
+        },
+        {
+          "src": "/media/keys.webp",
+          "width": 1333,
+          "height": 2000,
+          "alt": {
+            "zh": "键盘手站在电子键盘和谱架后弹奏。",
+            "en": "The keyboard player performing behind an electronic keyboard and music stand."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/keys-720.webp",
+              "width": 720,
+              "height": 1080
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rehearsal-room",
+      "status": "published",
+      "order": 4,
+      "detail": false,
+      "title": {
+        "zh": "排练室里",
+        "en": "The rehearsal room"
+      },
+      "images": [
+        {
+          "src": "/media/rehearsal-room.webp",
+          "width": 2000,
+          "height": 1500,
+          "alt": {
+            "zh": "排练室里的乐队成员与鼓组、吉他和谱架，镜头前伸着一只手。",
+            "en": "Band members with drums, guitar and a music stand in a rehearsal room, with a hand in the foreground."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/rehearsal-room-720.webp",
+              "width": 720,
+              "height": 540
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "same-frame",
+      "status": "published",
+      "order": 5,
+      "detail": false,
+      "title": {
+        "zh": "同一张照片里",
+        "en": "In the same frame"
+      },
+      "images": [
+        {
+          "src": "/media/same-frame.webp",
+          "width": 2000,
+          "height": 1500,
+          "alt": {
+            "zh": "一群朋友在夜晚街边靠近镜头合影。",
+            "en": "A group of friends gathered close to the camera for a night-time street photograph."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/same-frame-720.webp",
+              "width": 720,
+              "height": 540
+            }
+          ]
+        }
+      ],
+      "aboutFeatured": true
+    },
+    {
+      "id": "a-pause",
+      "status": "published",
+      "order": 6,
+      "detail": false,
+      "title": {
+        "zh": "坐一会儿",
+        "en": "A little pause"
+      },
+      "images": [
+        {
+          "src": "/media/a-pause.webp",
+          "width": 2000,
+          "height": 1500,
+          "alt": {
+            "zh": "一位戴眼镜的年轻人蹲在蓝色座椅旁，对着镜头做手势。",
+            "en": "A young person wearing glasses crouching beside blue seats and gesturing towards the camera."
+          },
+          "rightsConfirmed": true,
+          "sources": [
+            {
+              "src": "/media/a-pause-720.webp",
+              "width": 720,
+              "height": 540
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

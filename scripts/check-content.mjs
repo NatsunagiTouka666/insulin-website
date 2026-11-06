@@ -20,6 +20,10 @@ export function validate(data, { release = false, publicDir = path.resolve('publ
     if (photo.caption) bilingual(photo.caption, `${label}.caption`);
     if (photo.rightsConfirmed !== true) fail(`${label}: public image permission must be confirmed`);
     else approvedMedia.add(resolved);
+    for (const variant of photo.sources || []) {
+      image({ ...variant, alt: photo.alt, rightsConfirmed: photo.rightsConfirmed }, `${label}.source`);
+      if (variant.width > photo.width || Math.abs(variant.width / variant.height - photo.width / photo.height) > 0.01) fail(`${label}: responsive image must preserve the original aspect ratio`);
+    }
   };
   if (!data.approvals || !['chineseCopy','englishCopy','members','media'].every(key=>typeof data.approvals[key]==='boolean')) fail('Four explicit approval flags are required');
   if (release && !Object.values(data.approvals || {}).every(Boolean)) fail('Release blocked: owner approval of Chinese copy, English copy, members and media is required');

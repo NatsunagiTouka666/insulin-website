@@ -9,7 +9,7 @@ const original = JSON.parse(fs.readFileSync('src/content/site.json','utf8'));
 test('private preview accepts truthful incomplete material; release rejects it', () => {
   assert.deepEqual(validate(original), []);
   assert.ok(validate(original, {release:true}).some(e=>e.includes('owner approval')));
-  assert.ok(validate(original, {release:true}).some(e=>e.includes('approved band photograph')));
+  assert.ok(validate({...original, archive:[]}, {release:true}).some(e=>e.includes('approved band photograph')));
 });
 test('unlicensed video is rejected even in a draft record', () => {
   const data=structuredClone(original);
@@ -33,6 +33,9 @@ test('complete approved material passes release; partial translations fail', () 
     data.members.forEach((member,i)=>{member.name=`测试成员${i+1}`;member.nameEn=`Test member ${i+1}`;member.status='published';});
     data.archive=[{id:'test-only',status:'published',images:[{src:'/media/test.svg',alt:{zh:'测试图',en:'Test image'},width:100,height:100,rightsConfirmed:true}]}];
     assert.deepEqual(validate(data,{release:true,publicDir:tmp}),[]);
+    data.archive[0].images[0].sources=[{src:'/media/test.svg',width:25,height:100}];
+    assert.ok(validate(data,{publicDir:tmp}).some(e=>e.includes('aspect ratio')));
+    delete data.archive[0].images[0].sources;
     data.archive[0].images[0].alt.en='';
     assert.ok(validate(data,{release:true,publicDir:tmp}).some(e=>e.includes('.alt')));
     fs.writeFileSync(path.join(tmp,'media','unreviewed.mp4'),'test data');

@@ -1,12 +1,12 @@
 ---
 import { words } from '../lib/content.js';
-const { images = [], lang = 'zh', id = 'gallery' } = Astro.props;
+const { images = [], lang = 'zh', id = 'gallery', priority = false, sizes = '(max-width: 600px) 90vw, 65vw' } = Astro.props;
 const t = words[lang];
 ---
 <div class="gallery" data-gallery={id}>
   {images.map((photo, i) => <figure>
     <a class="photo-link" href={photo.src} data-lightbox data-index={i} aria-label={`${t.expand} — ${photo.alt[lang]}`}>
-      <img src={photo.src} alt={photo.alt[lang]} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+      <img src={photo.sources?.[0]?.src || photo.src} srcset={photo.sources?.length ? [...photo.sources, photo].map(source => `${source.src} ${source.width}w`).join(', ') : undefined} sizes={photo.sources?.length ? sizes : undefined} alt={photo.alt[lang]} width={photo.width} height={photo.height} loading={priority && i === 0 ? 'eager' : 'lazy'} fetchpriority={priority && i === 0 ? 'high' : undefined} decoding="async" />
       <span class="photo-plus" aria-hidden="true">↗</span>
     </a>
     {photo.caption?.[lang] && <figcaption>{photo.caption[lang]}</figcaption>}

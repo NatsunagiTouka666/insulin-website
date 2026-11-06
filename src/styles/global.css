@@ -47,6 +47,12 @@ main:focus { outline:none; }
 .threads { width:100%; height:clamp(220px,35vw,520px); overflow:hidden; color:#837b6c; }
 .threads svg { width:100%; height:100%; display:block; }
 .interlude-note { font:15px/1.8 var(--serif); text-align:center; color:var(--muted); margin-top:-18px; letter-spacing:.1em; }
+.home-feature { margin:68px var(--gutter) 0; }
+.about-feature { margin:30px var(--gutter) 0; }
+.photo-caption-row { display:flex; align-items:center; justify-content:space-between; gap:24px; padding-top:14px; }
+.photo-caption-row .eyebrow { color:var(--muted); }
+.photo-caption-row .text-link { font-size:10px; }
+.featured-photo .photo-plus { width:44px; height:44px; right:22px; bottom:22px; }
 .section-space { margin:0 var(--gutter); padding-top:120px; }
 .section-space>.section-label { border-top:1px solid var(--line); padding-top:20px; }
 .split-editorial { display:grid; grid-template-columns:1.25fr 1fr; gap:60px; padding:62px 0; }
@@ -147,6 +153,11 @@ video { display:block; width:100%; max-height:75vh; background:var(--ink); }
   .text-link { font-size:11px; gap:27px; }
   .scroll-note { margin-top:32px; font-size:8px; padding:15px 0; }
   .interlude { padding-top:45px; }
+  .home-feature { margin-top:36px; }
+  .about-feature { margin-top:12px; }
+  .photo-caption-row { gap:14px; padding-top:10px; }
+  .photo-caption-row .text-link { font-size:9px; gap:15px; white-space:nowrap; }
+  .featured-photo .photo-plus { right:12px; bottom:12px; width:36px; height:36px; }
   .section-label { font-size:8px; letter-spacing:.1em; }
   .threads { height:220px; }
   .threads svg { width:170%; max-width:none; margin-left:-35%; }

@@ -28,6 +28,10 @@
 
 只在确认权利后填写 `rightsConfirmed: true`。`width`、`height` 是图片真实像素尺寸。可选的 `caption`、`title`、`text` 使用 `{ "zh": "中文", "en": "已审核英文" }`。图片不强制滤镜；保留原件，另外生成 WebP/AVIF 网页版本。
 
+图片可以附带 `sources: [{ "src": "/media/photo-720.webp", "width": 720, "height": 480 }]`，供浏览器按屏幕选择较小版本。尺寸必须与大图保持相同比例，所有衍生图都需要被内容记录引用。大图链接仍指向 `src`，无需把原始相机文件上传。
+
+在一条含图片的档案记录上设置 `homeFeatured: true` 或 `aboutFeatured: true`，会使用其第一张图片作为相应页面的主图。每种标记只选择一条记录。多图档案开启 `detail: true` 时，列表只显示封面，详情页展示完整图片组。
+
 视频只接入独立 HTTPS 视频地址，例：`video: { "src": "https://…/approved.mp4", "type": "video/mp4", "rightsConfirmed": true }`。不要把大视频放入 Git。原有翻唱排练视频在公开权利未核实前不得接入。
 
 ## GitHub 电脑操作

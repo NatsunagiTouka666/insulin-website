@@ -23,6 +23,7 @@ if (dialog && typeof dialog.showModal === 'function') {
   document.querySelectorAll('[data-lightbox]').forEach(link => link.addEventListener('click', event => {
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
     event.preventDefault();
+    if (dialog.open) return;
     opener = link;
     items = [...link.closest('[data-gallery]').querySelectorAll('[data-lightbox]')];
     position = items.indexOf(link);
@@ -33,6 +34,7 @@ if (dialog && typeof dialog.showModal === 'function') {
     dialog.querySelector('[data-close]').focus();
   }));
   dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('cancel', () => { document.body.style.overflow = oldOverflow; });
   dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
   dialog.addEventListener('close', () => { document.body.style.overflow = oldOverflow; image.removeAttribute('src'); opener?.focus(); });
   previous.addEventListener('click', () => move(-1));
@@ -59,7 +61,7 @@ document.querySelectorAll('video').forEach(video => {
 
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const desktop = matchMedia('(min-width: 900px)');
-const layers = [...document.querySelectorAll('[data-parallax] svg')];
+const layers = [...document.querySelectorAll('[data-parallax] svg, [data-parallax-photo]')];
 let frame = 0;
 const draw = () => {
   frame = 0;

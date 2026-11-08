@@ -11,7 +11,9 @@ test('all bilingual routes exist with matching language and title',()=>{
     assert.match(html,new RegExp(`<html lang="${lang==='zh'?'zh-CN':'en'}"`));
     assert.match(html,/<title>[^<]*insulin[^<]*<\/title>/);
     assert.match(html,/<main[^>]+id="main"/);
-    assert.match(html,/noindex,nofollow/);
+    const approved=Object.values(content.approvals).every(Boolean);
+    assert.equal(/noindex,nofollow/.test(html),!approved);
+    assert.equal(/class="review-strip"/.test(html),!approved);
     assert.doesNotMatch(html,/<video|autoplay/);
   }
 });

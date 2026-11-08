@@ -1,9 +1,9 @@
 {
   "approvals": {
-    "chineseCopy": false,
-    "englishCopy": false,
+    "chineseCopy": true,
+    "englishCopy": true,
     "members": true,
-    "media": false
+    "media": true
   },
   "home": {
     "zh": {

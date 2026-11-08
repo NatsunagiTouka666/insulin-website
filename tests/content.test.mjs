@@ -7,8 +7,9 @@ import { validate } from '../scripts/check-content.mjs';
 const original = JSON.parse(fs.readFileSync('src/content/site.json','utf8'));
 
 test('private preview accepts truthful incomplete material; release rejects it', () => {
-  assert.deepEqual(validate(original), []);
-  assert.ok(validate(original, {release:true}).some(e=>e.includes('owner approval')));
+  const preview = {...original, approvals:{...original.approvals, chineseCopy:false}};
+  assert.deepEqual(validate(preview), []);
+  assert.ok(validate(preview, {release:true}).some(e=>e.includes('owner approval')));
   assert.ok(validate({...original, archive:[]}, {release:true}).some(e=>e.includes('approved band photograph')));
 });
 test('unlicensed video is rejected even in a draft record', () => {

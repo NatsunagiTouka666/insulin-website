@@ -1,0 +1,37 @@
+Nexio Liquid Lab — Web adaptation / 2026-10-31
+
+Uses the locally installed nexio-liquid-motion skill.
+Baseline: NexioSchedule 1.6.7-1025; matched public source revision:
+e67f3b79b9c465789ef7ae192b9c23740e7519da
+https://github.com/HaoZai000/NexioSchedule/tree/e67f3b79b9c465789ef7ae192b9c23740e7519da
+
+SDF refraction derives from Shaders.kt:
+backdrop/src/commonMain/kotlin/com/kyant/backdrop/internal/Shaders.kt
+Original shader Copyright 2025 Kyant, Apache License 2.0.
+See Apache-2.0.txt in this directory.
+
+liquid-motion.mjs is the skill's newly written portable adaptation, copied
+without modification. It uses Nexio's evidenced spring constants.
+optics.mjs adapts shader geometry to WebGL; its magnification, blur, highlight,
+pressure response and coordinate handling are new Web approximations.
+This demo does not distribute or compile the AGPL-licensed Kotlin application.
+The original Nexio application has its own AGPL-3.0 license; this notice does
+not relicense that application or the skill's original source assets.
+
+The texture source includes only this demo's procedural Canvas2D scene.
+It excludes arbitrary DOM, media and the optical
+output. During press/drag, an additional opaque texture redraws only the
+existing navigation labels/icons and panel, using their measured DOM geometry.
+Its lens replaces covered pixels above the original DOM; it has no semantics
+or hit targets.
+
+This revision uses seven wavelength samples (650/610/580/550/500/460/420nm)
+with a normalized Cauchy 1/lambda^2 displacement and illustrative RGB response,
+rather than the original shader spectral weights. Each channel sums to one.
+This is a two-dimensional optical approximation, not physical ray tracing.
+CSS fallback provides a readable surface without geometric refraction.
+
+insulin adaptation (2026-11-08): NavigationTexture reads two real anchor links
+and their data-liquid-label spans. Site-specific pointer/keyboard routing,
+controlled warm-paper surface, accessibility preference, and animation wiring
+are in the insulin source tree. This adaptation retains the original notices.

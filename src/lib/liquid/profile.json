@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "id": "web-normal-motion-20261031-v2",
+  "kind": "web-adaptation-reference",
+  "source": {
+    "project": "Nexio Liquid Lab",
+    "commit": "6aa4ad45e2abf0b268a2eed24e81f154478c8b1a",
+    "date": "2026-10-31",
+    "evidence": "local-chromium-desktop-and-390px-viewport-interaction-and-pixel-tests",
+    "originalNativeRevision": "e67f3b79b9c465789ef7ae192b9c23740e7519da",
+    "files": [
+      {
+        "path": "Apache-2.0.txt",
+        "bytes": 10751,
+        "sha256": "cf96a8b6ffc27b4d1e184d80afec475b09fe921c1dcc491ad74c0e8478a77d31"
+      },
+      {
+        "path": "NOTICE.txt",
+        "bytes": 1774,
+        "sha256": "393a740a93d4837cf0bb7feabcd0feccbfc2822d821609ceba8ff614602a74ce"
+      },
+      {
+        "path": "app.mjs",
+        "bytes": 20254,
+        "sha256": "9493ba98683ab019f3d703ed0df71a46cd7d6fe9eb01b87ba069d51da4d7e502"
+      },
+      {
+        "path": "index.html",
+        "bytes": 8776,
+        "sha256": "436bed75a9c95af8698e94561dcacb7ca102c32bca0ec5a6962ce7c09007c30c"
+      },
+      {
+        "path": "liquid-motion.mjs",
+        "bytes": 4531,
+        "sha256": "6ae75c1982fd6ab823301474ca5e5ca0e8d5a3568207ca060d3a46eb2c2bd3aa"
+      },
+      {
+        "path": "nav-texture.mjs",
+        "bytes": 7912,
+        "sha256": "e53d31baf5ac559ce319e95e23a15713ed7b1aef78f49aff0a407cdd4f6423d4"
+      },
+      {
+        "path": "optics.mjs",
+        "bytes": 16045,
+        "sha256": "a4279bef9317b31584285f4e85b5e127a3207cf42ceaec579d6e2363bd5f2ce3"
+      },
+      {
+        "path": "style.css",
+        "bytes": 16797,
+        "sha256": "17b16bb7304afb1946d159d2542e7d0ff60c4d97f1e90c1ea981581608354488"
+      }
+    ]
+  },
+  "normal": {
+    "reduceMotion": false,
+    "reduceTransparency": false,
+    "timeScale": 1,
+    "refraction": 1,
+    "dispersion": 0.65,
+    "backgroundBlurCssPx": 4,
+    "navigationBlurMultiplier": 0.42,
+    "quality": "balanced",
+    "selectorPressedScale": 1.11,
+    "floatingPressedScale": 1.06,
+    "contentCapturePressureThreshold": 0.002,
+    "dprCap": 2,
+    "tint": 0.055
+  },
+  "springs": {
+    "index": {
+      "dampingRatio": 1,
+      "stiffness": 1000
+    },
+    "velocity": {
+      "dampingRatio": 0.5,
+      "stiffness": 300
+    },
+    "press": {
+      "dampingRatio": 1,
+      "stiffness": 1000
+    },
+    "scaleX": {
+      "dampingRatio": 0.6,
+      "stiffness": 250
+    },
+    "scaleY": {
+      "dampingRatio": 0.7,
+      "stiffness": 250
+    }
+  },
+  "deformation": {
+    "normalizedIndexVelocityDivisor": 10,
+    "xCoefficient": 0.75,
+    "yCoefficient": 0.25,
+    "clamp": 0.2,
+    "releaseDistanceFraction": 0.025
+  },
+  "spectrum": {
+    "wavelengthsNm": [
+      650,
+      610,
+      580,
+      550,
+      500,
+      460,
+      420
+    ],
+    "referenceWavelengthNm": 550,
+    "displacementModel": "normalized Cauchy 1/lambda^2",
+    "rgbResponse": "illustrative, normalized per channel",
+    "spreadCssPx": "dispersion * (0.8 + 10.8*pressure + 3*boundedSpeed) * sag",
+    "idlePeakSpreadCssPx": 0.52,
+    "pressedPeakSpreadCssPx": 7.54
+  },
+  "contract": {
+    "backgroundSource": "opaque controlled canvas, excluding navigation and optical output",
+    "foregroundSource": "opaque background + original flat panel + measured labels and SVG paths; excludes selector and optical output",
+    "replacement": "foreground optical output replaces covered DOM pixels; no second interactive/semantic tree",
+    "normalBaseline": "full motion with timeScale=1; reduced motion remains an optional accessibility branch",
+    "scope": "reference sample only; preserve destination palette, content, routes, navigation count and semantics"
+  },
+  "limits": [
+    "not an arbitrary DOM screenshot renderer",
+    "not physical ray tracing",
+    "not original AGSL parameter equivalence",
+    "no physical mobile, Safari or frame-time claims",
+    "reference nav sampler recognizes button[data-tab], span text and SVG path only"
+  ]
+}

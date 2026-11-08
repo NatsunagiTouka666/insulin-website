@@ -1,3 +1,7 @@
+import { initMotion, motionEnabled, animateImage } from './motion.mjs';
+import { initLiquidNavigation } from './liquid-navigation.mjs';
+initMotion();
+initLiquidNavigation(document.querySelector('[data-liquid-navigation]'), { motionEnabled });
 const preferenceKey = 'insulin-language';
 document.querySelectorAll('[data-language]').forEach(link => link.addEventListener('click', () => {
   try { localStorage.setItem(preferenceKey, link.dataset.language); } catch { /* Storage is optional. */ }
@@ -14,6 +18,10 @@ if (dialog && typeof dialog.showModal === 'function') {
     const source = items[position].querySelector('img');
     image.src = items[position].href;
     image.alt = source.alt;
+    image.width = Number(source.getAttribute('width')) || source.naturalWidth;
+    image.height = Number(source.getAttribute('height')) || source.naturalHeight;
+    image.onload = () => { if (dialog.open) animateImage(image); };
+    if (dialog.open && image.complete) animateImage(image);
     caption.textContent = items[position].closest('figure').querySelector('figcaption')?.textContent || source.alt;
     dialog.querySelector('.lightbox-count').textContent = `${position + 1} / ${items.length}`;
     dialog.querySelector('.lightbox-original').href = items[position].href;
@@ -30,6 +38,7 @@ if (dialog && typeof dialog.showModal === 'function') {
     oldOverflow = document.body.style.overflow;
     show();
     dialog.showModal();
+    animateImage(image, opener);
     document.body.style.overflow = 'hidden';
     dialog.querySelector('[data-close]').focus();
   }));
@@ -59,14 +68,13 @@ document.querySelectorAll('video').forEach(video => {
   video.addEventListener('playing', () => { error.hidden = true; });
 });
 
-const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const desktop = matchMedia('(min-width: 900px)');
 const layers = [...document.querySelectorAll('[data-parallax] svg, [data-parallax-photo]')];
 let frame = 0;
 const draw = () => {
   frame = 0;
   layers.forEach(layer => {
-    if (motion.matches || !desktop.matches) { layer.style.transform = ''; return; }
+    if (!motionEnabled() || !desktop.matches) { layer.style.transform = ''; return; }
     const rect = layer.parentElement.getBoundingClientRect();
     const offset = Math.max(-18, Math.min(18, (innerHeight / 2 - rect.top - rect.height / 2) * .035));
     layer.style.transform = `translateY(${offset}px)`;
@@ -76,7 +84,7 @@ const queue = () => { if (!frame) frame = requestAnimationFrame(draw); };
 if (layers.length) {
   addEventListener('scroll', queue, { passive: true });
   addEventListener('resize', queue, { passive: true });
-  motion.addEventListener('change', queue);
+  document.addEventListener('insulin:motionchange', queue);
   desktop.addEventListener('change', queue);
   draw();
 }

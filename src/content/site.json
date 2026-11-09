@@ -164,7 +164,8 @@
           ]
         }
       ],
-      "homeFeatured": true
+      "homeFeatured": true,
+      "aboutFeatured": true
     },
     {
       "id": "two-voices",
@@ -348,8 +349,7 @@
             }
           ]
         }
-      ],
-      "aboutFeatured": true
+      ]
     },
     {
       "id": "a-pause",

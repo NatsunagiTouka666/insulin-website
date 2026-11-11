@@ -4,7 +4,7 @@ import { words } from '../lib/content.js';
 const { record, lang, number = '01', priority = false } = Astro.props;
 const t = words[lang];
 ---
-<section class="featured-photo" data-parallax-photo>
+<section class="featured-photo" data-record={record.id} data-reading-anchor="featured" data-parallax-photo>
   <Gallery images={record.images.slice(0,1)} lang={lang} id={`featured-${record.id}`} priority={priority} sizes="(max-width: 600px) 90vw, 89vw" />
-  <div class="photo-caption-row"><span class="eyebrow">{number} / {record.title[lang]}</span>{record.detail && <a class="text-link" href={`/${lang}/archive/${record.id}/`}>{t.viewArchive}<span aria-hidden="true">↗</span></a>}</div>
+  <div class="photo-caption-row"><span class="eyebrow">{number} / {record.title[lang]}</span>{record.detail && <a class="text-link" data-open-record={record.id} href={`/${lang}/archive/${record.id}/`}>{t.viewArchive}<span aria-hidden="true">↗</span></a>}</div>
 </section>

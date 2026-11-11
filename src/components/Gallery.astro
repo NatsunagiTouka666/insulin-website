@@ -4,8 +4,8 @@ const { images = [], lang = 'zh', id = 'gallery', priority = false, sizes = '(ma
 const t = words[lang];
 ---
 <div class="gallery" data-gallery={id}>
-  {images.map((photo, i) => <figure>
-    <a class="photo-link" href={photo.src} data-lightbox data-index={i} aria-label={`${t.expand} — ${photo.alt[lang]}`}>
+  {images.map((photo, i) => <figure data-reading-anchor={`${id}-photo-${i}`}>
+    <a class="photo-link" href={photo.src} data-astro-reload data-lightbox data-index={i} aria-label={`${t.expand} — ${photo.alt[lang]}`}>
       <img src={photo.sources?.[0]?.src || photo.src} srcset={photo.sources?.length ? [...photo.sources, photo].map(source => `${source.src} ${source.width}w`).join(', ') : undefined} sizes={photo.sources?.length ? sizes : undefined} alt={photo.alt[lang]} width={photo.width} height={photo.height} loading={priority && i === 0 ? 'eager' : 'lazy'} fetchpriority={priority && i === 0 ? 'high' : undefined} decoding="async" />
       <span class="photo-plus" aria-hidden="true">↗</span>
     </a>

@@ -8,5 +8,5 @@ const lang = Astro.params.lang;
 const t = words[lang];
 ---
 <Layout lang={lang} section="archive" title={record.title?.[lang] || t.entry} path={`archive/${record.id}/`}>
-  <section class="detail-page"><a class="text-link" href={`/${lang}/archive/`}>← {t.back}</a><Record record={record} lang={lang} detail /></section>
+  <section class="detail-page" data-detail={record.id}><a class="text-link" data-archive-return href={`/${lang}/archive/`}>← {t.back}</a><Record record={record} lang={lang} detail /></section>
 </Layout>

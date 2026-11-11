@@ -7,6 +7,6 @@ const lang = Astro.params.lang;
 const t = words[lang];
 ---
 <Layout lang={lang} section="archive" title={t.archive} path="archive/">
-  <section class="page-intro archive-intro"><span class="eyebrow">ARCHIVE / COLLECTED DAYS</span><h1>{lang === 'zh' ? '留下一些，\n还想记得的。' : 'A few things\nto keep close.'}</h1><div class="intro-end"><span class="tiny-note">{records.length.toString().padStart(2,'0')} {lang === 'zh' ? '则记录' : 'ENTRIES'}</span><p>{t.archiveNote}</p></div></section>
+  <section class="page-intro archive-intro" data-reading-anchor="intro"><span class="eyebrow">ARCHIVE / COLLECTED DAYS</span><h1>{lang === 'zh' ? '留下一些，\n还想记得的。' : 'A few things\nto keep close.'}</h1><div class="intro-end"><span class="tiny-note">{records.length.toString().padStart(2,'0')} {lang === 'zh' ? '则记录' : 'ENTRIES'}</span><p>{t.archiveNote}</p></div></section>
   {records.length ? <section class="archive-grid">{[...records].sort((a,b)=>(a.order||0)-(b.order||0)).map(record=><Record record={record} lang={lang} />)}</section> : <section class="archive-empty"><span class="empty-mark" aria-hidden="true">(　)</span><h2>{t.emptyTitle}</h2><p>{t.empty}</p><span class="eyebrow">TO BE CONTINUED</span></section>}
 </Layout>

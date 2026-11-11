@@ -1,7 +1,7 @@
 /* Site-specific skin. Optical geometry and seven-band sampling live in liquid/*.mjs. */
-.site-header { padding-top:13px; padding-bottom:13px; gap:10px; }
+.site-header { position:sticky; top:0; z-index:10; padding-top:13px; padding-bottom:13px; gap:10px; background:var(--paper); }
 .header-controls { display:flex; align-items:center; gap:10px; }
-.liquid-stage { position:relative; padding:12px; isolation:isolate; flex-shrink:0; view-transition-name:band-navigation; }
+.liquid-stage { position:relative; padding:12px; isolation:isolate; flex-shrink:0; }
 .liquid-source,.liquid-optics { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
 .liquid-source { z-index:0; }
 .liquid-optics { z-index:4; visibility:hidden; }
@@ -9,7 +9,8 @@
 .site-header nav.liquid-dock { position:relative; z-index:2; padding:4px; gap:0; border:1px solid rgba(120,105,82,.16); border-radius:999px; background:rgba(255,255,255,.28); touch-action:pan-y; user-select:none; }
 .site-header nav.liquid-dock a { position:relative; z-index:3; display:flex; justify-content:center; align-items:center; width:84px; min-height:44px; padding:0 8px; border-radius:999px; font-size:12px; line-height:1; -webkit-user-drag:none; }
 .site-header nav.liquid-dock a::after { display:none; }
-.liquid-selector { position:absolute; z-index:2; pointer-events:none; border:1px solid rgba(255,255,255,.85); border-radius:999px; background:rgba(255,255,255,.43); box-shadow:0 3px 12px rgba(69,52,33,.1),inset 0 -1px 2px rgba(110,88,62,.08); opacity:0; }
+.liquid-stage:not([data-ready]) a[aria-current] { background:rgba(255,255,255,.65); }
+.liquid-selector { position:absolute; left:0; top:0; z-index:2; pointer-events:none; border:1px solid rgba(255,255,255,.85); border-radius:999px; background:rgba(255,255,255,.43); box-shadow:0 3px 12px rgba(69,52,33,.1),inset 0 -1px 2px rgba(110,88,62,.08); opacity:0; }
 .liquid-stage[data-ready="true"] .liquid-selector { opacity:1; }
 .liquid-stage[data-show-selector="false"] .liquid-selector { opacity:0; }
 .liquid-stage[data-optics-active="true"] .liquid-selector { background:transparent; border-color:transparent; box-shadow:none; }
@@ -18,34 +19,63 @@
 .header-controls>.language-switch { width:38px; min-height:44px; display:grid; place-items:center; font-size:11px; border-radius:50%; border:1px solid var(--line); }
 .motion-toggle { padding:0 2px; border:0; background:transparent; color:var(--muted); font:inherit; text-decoration:underline; text-underline-offset:4px; min-height:24px; white-space:nowrap; }
 .motion-toggle:hover { color:var(--ink); }
-.photo-plus,.to-top,.lightbox button { background:rgba(246,243,236,.82); backdrop-filter:blur(12px) saturate(1.15); -webkit-backdrop-filter:blur(12px) saturate(1.15); box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 3px 12px rgba(41,40,37,.08); }
-.motion-ready [data-reveal] { opacity:0; translate:0 18px; transition:opacity .65s ease,translate .65s cubic-bezier(.2,.7,.2,1); transition-delay:var(--reveal-delay,0ms); }
-.motion-ready [data-reveal].is-visible { opacity:1; translate:0 0; }
-.hero-topline,.hero-logo,.hero-bottom,.page-intro>.eyebrow,.page-intro>h1,.intro-end { animation:page-arrive .7s cubic-bezier(.2,.7,.2,1) both; }
-.hero-logo,.page-intro>h1 { animation-delay:.055s; }
-.hero-bottom,.intro-end { animation-delay:.12s; }
-@keyframes page-arrive { from { opacity:0; translate:0 15px; } to { opacity:1; translate:0 0; } }
-@keyframes page-leave { to { opacity:0; transform:translateY(-7px); } }
-@keyframes page-enter { from { opacity:0; transform:translateY(9px); } }
-::view-transition-old(root) { animation:page-leave .24s ease both; }
-::view-transition-new(root) { animation:page-enter .32s cubic-bezier(.2,.7,.2,1) both; }
-html[data-motion="reduced"] { scroll-behavior:auto; }
+.photo-plus,.to-top,.lightbox button { background:rgba(246,243,236,.85); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px); box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 3px 12px rgba(41,40,37,.08); }
+
+:root { --arrival-distance:10px; --ease-out:cubic-bezier(.22,.72,.22,1); --photo-morph:350ms; --header-height:104px; scroll-padding-top:calc(var(--header-height) + 8px); view-transition-name:none; }
+html[data-motion="full"] :is(a:not([data-liquid-tab],.photo-link),button,.photo-plus) { transition:scale 155ms var(--ease-out), color 155ms ease; }
+.lightbox-caption { transition:top 180ms var(--ease-out); }
+html[data-motion="full"] :is(a:not([data-liquid-tab],.photo-link),button):is(:active,.is-key-pressed),
+html[data-motion="full"] .photo-link:is(:active,.is-key-pressed) .photo-plus { scale:.965; transition-duration:75ms; }
+
+@media (hover:hover) and (pointer:fine) {
+  html[data-motion="full"] :is(.text-link,.next-section>a):hover span { transform:translate(2px,-2px); }
+  html[data-motion="full"] .scroll-note:hover span:last-child { transform:translateY(3px); }
+  .next-section>a span,.scroll-note span { transition:transform 170ms var(--ease-out); }
+  .photo-link img { transition:scale 240ms var(--ease-out); }
+  html[data-motion="full"] .photo-link:hover img { scale:1.018; }
+}
+[data-parallax-photo] .photo-link[style*="--photo-pan"] img { translate:0 var(--photo-pan); scale:1.065; }
+html[data-motion-lite] :is(.photo-plus,.to-top,.lightbox button) { backdrop-filter:none; -webkit-backdrop-filter:none; }
+html[data-motion-lite] [data-parallax-photo] .photo-link img { translate:none; scale:1; transition:translate 160ms var(--ease-out),scale 160ms var(--ease-out); }
+
+html[data-entrance][data-motion="full"] :is(.hero-topline,.hero-logo,.hero-bottom,.page-intro,.not-found h1,.detail-page h1,.archive-empty,.threads) {
+  animation:page-arrive 210ms var(--ease-out) both;
+}
+html[data-entrance][data-motion="full"] :is(.hero-bottom,.archive-empty) { animation-delay:25ms; }
+html[data-entrance][data-motion="full"] :is(.featured-photo,.detail-page) .gallery>figure:first-child {
+  animation:page-arrive 210ms 28ms var(--ease-out) both;
+}
+.reveal-enter { animation:page-arrive 320ms var(--ease-out); }
+.reveal-enter:focus-within { animation:none; }
+@keyframes page-arrive { from { opacity:.42; translate:0 var(--arrival-distance); } }
+
+[data-transition-photo] { view-transition-name:band-photo; }
+::view-transition { pointer-events:none; clip-path:inset(var(--header-height) 0 0); }
+::view-transition-group(band-photo) { animation-duration:var(--photo-morph); animation-timing-function:var(--ease-out); }
+html[data-swap="return"]::view-transition-group(band-photo) { animation-duration:270ms; }
+html[data-swap="language"]::view-transition-group(band-photo) { animation-duration:180ms; }
+.outgoing-language { position:fixed; inset:0; z-index:8; overflow:hidden; pointer-events:none; }
+.outgoing-language :is(.photo-link,.threads,video) { visibility:hidden; }
+.outgoing-language * { animation:none !important; }
+
 html[data-motion="reduced"] *,html[data-motion="reduced"] *::before,html[data-motion="reduced"] *::after { animation:none !important; transition:none !important; }
-html[data-motion="reduced"] [data-reveal] { opacity:1; translate:none; }
-html[data-motion="reduced"] [data-parallax-photo],html[data-motion="reduced"] .threads svg { transform:none !important; }
+html[data-motion="reduced"] [data-parallax-photo] .photo-link img { translate:none; scale:1; }
 html[data-motion="reduced"]::view-transition-group(*),html[data-motion="reduced"]::view-transition-old(*),html[data-motion="reduced"]::view-transition-new(*) { animation:none !important; }
 @media (max-width:600px) {
+  :root { --arrival-distance:5px; --photo-morph:310ms; --header-height:94px; }
   .site-header { padding-top:8px; padding-bottom:8px; }
   .header-controls { gap:4px; }
   .site-header nav.liquid-dock a { width:64px; font-size:11px; }
   .header-controls>.language-switch { width:30px; font-size:10px; }
   .footer-bottom .motion-toggle { margin-left:auto; }
   .footer-bottom>a { margin-left:8px; }
+  .photo-plus,.to-top,.lightbox button { backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); }
 }
 @media (forced-colors:active) {
   .liquid-source,.liquid-optics,.liquid-selector { visibility:hidden !important; }
   .site-header nav.liquid-dock { background:Canvas; border-color:ButtonText; }
   .site-header nav.liquid-dock a[aria-current] { outline:1px solid LinkText; }
+  .lightbox-wash { background:Canvas; }
 }
 @media (prefers-reduced-transparency:reduce) {
   .liquid-optics { visibility:hidden !important; }

@@ -5,10 +5,10 @@ const { record, lang, detail = false } = Astro.props;
 const t = words[lang];
 const images = detail || !record.detail ? record.images || [] : (record.images || []).slice(0, 1);
 ---
-<article class="archive-entry">
+<article class="archive-entry" data-record={record.id} data-reading-anchor={`record-${record.id}`}>
   <div class="entry-heading"><span class="eyebrow">{record.date || `${t.entry} / ${record.id}`}</span>{record.tags?.length > 0 && <span class="eyebrow">{record.tags.join(' · ')}</span>}</div>
   {detail ? <h1>{record.title?.[lang] || t.entry}</h1> : record.title?.[lang] && <h2>{record.title[lang]}</h2>}
-  <Gallery images={images} lang={lang} id={record.id} />
+  <Gallery images={images} lang={lang} id={record.id} priority={detail} />
   {record.text?.[lang] && <p class="entry-text">{record.text[lang]}</p>}
   {record.video?.rightsConfirmed && <div class="video-wrap">
     <video controls playsinline preload="none" poster={record.video.poster || undefined} aria-label={record.title?.[lang] || t.entry}>
@@ -17,5 +17,5 @@ const images = detail || !record.detail ? record.images || [] : (record.images |
     </video>
     <p class="video-error" role="status" hidden>{t.videoError}</p>
   </div>}
-  {record.detail && !detail && <a class="text-link" href={`/${lang}/archive/${record.id}/`}>{t.detail}<span aria-hidden="true">↗</span></a>}
+  {record.detail && !detail && <a class="text-link" data-open-record={record.id} href={`/${lang}/archive/${record.id}/`}>{t.detail}<span aria-hidden="true">↗</span></a>}
 </article>

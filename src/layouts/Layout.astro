@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/motion.css';
+import { ClientRouter } from 'astro:transitions';
 import { approved, words } from '../lib/content.js';
 import Wordmark from '../components/Wordmark.astro';
 const { lang = 'zh', section = 'home', title, description, path = '', counterpart = null } = Astro.props;
@@ -26,11 +27,24 @@ const pageTitle = title ? `${title} — insulin` : 'insulin — ' + (lang === 'z
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <title>{pageTitle}</title>
+    <ClientRouter fallback="swap" />
     <script is:inline>
-      (() => { let mode = 'auto'; try { mode = localStorage.getItem('insulin-motion') || 'auto'; } catch {} if (!['auto','full','reduced'].includes(mode)) mode = 'auto'; document.documentElement.dataset.motionPreference = mode; document.documentElement.dataset.motion = mode === 'reduced' || mode === 'auto' && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full'; })();
+      (() => {
+        const { dataset } = document.documentElement;
+        if (dataset.motionPreference) return;
+        let mode = 'auto';
+        try { mode = localStorage.getItem('insulin-motion') || 'auto'; } catch {}
+        if (!['auto', 'full', 'reduced'].includes(mode)) mode = 'auto';
+        dataset.motionPreference = mode;
+        dataset.motion = mode === 'reduced' || mode === 'auto' && matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'full';
+        if (dataset.motion === 'full' && performance.getEntriesByType('navigation')[0]?.type === 'navigate' && !location.hash) {
+          dataset.entrance = '';
+          setTimeout(() => delete dataset.entrance, 265);
+        }
+      })();
     </script>
   </head>
-  <body>
+  <body id="top" tabindex="-1">
     <a class="skip-link" href="#main">{t.skip}</a>
     {!approved && <div class="review-strip">{t.draft}</div>}
     <header class="site-header">
@@ -48,14 +62,20 @@ const pageTitle = title ? `${title} — insulin` : 'insulin — ' + (lang === 'z
         <a class="language-switch" href={counterpart || `/${other}/${path}`} lang={other === 'zh' ? 'zh-CN' : 'en'} hreflang={other === 'zh' ? 'zh-CN' : 'en'} data-language={other}>{t.language}</a>
       </div>
     </header>
-    <main id="main" tabindex="-1"><slot /></main>
-    <footer class="site-footer">
-      <div class="footer-top"><a class="brand" href={`/${lang}/`}><Wordmark /></a><p>{t.footer}</p><a class="to-top" href="#main" aria-label={lang === 'zh' ? '回到顶部' : 'Back to top'}>↑</a></div>
+    <main id="main" tabindex="-1" data-section={section}><slot /></main>
+    <footer class="site-footer" data-reading-anchor="footer">
+      <div class="footer-top"><a class="brand" href={`/${lang}/`}><Wordmark /></a><p>{t.footer}</p><a class="to-top" href="#top" aria-label={lang === 'zh' ? '回到顶部' : 'Back to top'}>↑</a></div>
       <div class="footer-bottom"><span>© {new Date().getFullYear()} insulin</span><span>{t.rights}</span><button class="motion-toggle" data-motion-toggle type="button" data-lang={lang}>{lang === 'zh' ? '动效：跟随系统' : 'Motion: Auto'}</button><a href={`/${other}/${path}`} data-language={other}>{t.language}</a></div>
     </footer>
     <dialog class="lightbox" aria-label={t.expand}>
+      <div class="lightbox-wash" aria-hidden="true"></div>
       <div class="lightbox-toolbar"><span class="lightbox-count" aria-live="polite"></span><button data-close aria-label={t.close}>×</button></div>
-      <div class="lightbox-stage"><button data-prev aria-label={t.prev}>←</button><figure><img class="lightbox-image" alt="" /><figcaption class="lightbox-caption"></figcaption></figure><button data-next aria-label={t.next}>→</button></div>
+      <div class="lightbox-stage">
+        <button data-prev aria-label={t.prev}>←</button>
+        <figure><div class="lightbox-media"></div><figcaption class="lightbox-caption"></figcaption></figure>
+        <button data-next aria-label={t.next}>→</button>
+      </div>
+      <p class="lightbox-status" role="status" hidden>{lang === 'zh' ? '原图暂时无法加载。' : 'The full-size image could not load.'}</p>
       <a class="lightbox-original" target="_blank" rel="noopener noreferrer">{t.original} ↗</a>
     </dialog>
     <script>import '../scripts/site.js';</script>
